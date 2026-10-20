@@ -1,0 +1,38 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.wonnabe'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// 거래내역 등록/조회용 REST API
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// 거래내역/분류결과 저장 (JPA + MySQL)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// DTO 입력값 검증 (CSV 업로드 바디 등)
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// 보일러플레이트 getter/setter/생성자 제거
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// MySQL 드라이버
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	// Swagger UI (springdoc-openapi, Spring Boot 3.x 전용 v2 버전대)
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
