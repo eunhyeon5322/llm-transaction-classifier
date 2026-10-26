@@ -27,6 +27,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	// MySQL 드라이버
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// 카드사 CSV 업로드 파싱 (따옴표/콤마 포함 필드 안전 처리)
+	implementation 'org.apache.commons:commons-csv:1.11.0'
 	// Swagger UI (springdoc-openapi, Spring Boot 3.x 전용 v2 버전대)
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
 
