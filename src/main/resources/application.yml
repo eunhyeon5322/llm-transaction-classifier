@@ -24,6 +24,20 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
 
+  data:
+    redis:
+      host: localhost
+      # 윈도우에 이미 다른 redis-server.exe(구버전, 3.0.504)가 6379를 쓰고 있어서
+      # MySQL(3307)과 같은 이유로 포트를 분리함 (docker run -p 6380:6379)
+      port: 6380
+
+gemini:
+  # 실제 키는 환경변수 GEMINI_API_KEY로 주입 (여기 커밋 금지)
+  api-key: ${GEMINI_API_KEY:}
+  base-url: https://generativelanguage.googleapis.com/v1beta
+  # 무료 티어, 단순 분류 작업용 경량 모델 (2.5-flash-lite는 신규 계정에 더이상 제공 안 됨 -> 3.5로 변경)
+  model: gemini-3.5-flash-lite
+
 logging:
   level:
     org.hibernate.SQL: debug

@@ -31,6 +31,8 @@ dependencies {
 	implementation 'org.apache.commons:commons-csv:1.11.0'
 	// Swagger UI (springdoc-openapi, Spring Boot 3.x 전용 v2 버전대)
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+	// 가맹점명 -> 카테고리 분류 결과 캐싱 (같은 가맹점명 재호출 방지)
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
