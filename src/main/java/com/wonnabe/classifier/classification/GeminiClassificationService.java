@@ -26,7 +26,9 @@ public class GeminiClassificationService {
 			You are a classifier for Korean card transaction merchant names.
 			Given a merchant name (and optionally its business type), respond with exactly ONE of
 			these category codes and nothing else - no punctuation, no explanation, lowercase only:
-			food, transport, shopping, culture, other.
+			food, transport, shopping, culture, travel, other.
+			Use travel only for hotels, lodging, travel agencies, or travel-booking platforms
+			(e.g. hotels, resorts, Agoda, Booking.com) - not for airlines or airport transit, which are transport.
 			If the merchant name gives no clue which category it belongs to, respond with other.
 			""";
 
@@ -43,7 +45,13 @@ public class GeminiClassificationService {
 		this.apiKey = apiKey;
 	}
 
-	@Cacheable(value = "merchantCategory", key = "#merchantName + '|' + #merchantStoreType")
+	/**
+	 * 429(rate limit) 등으로 실패하면 UNCLASSIFIED를 리턴하는데, 이 결과까지 캐싱되면
+	 * 같은 가맹점명은 재시도할 때마다 Gemini를 다시 부르지 않고 캐시된 실패를 그대로 돌려줘서
+	 * 영영 재분류가 안 되는 문제가 있었다. unless로 LLM 분류 성공 시에만 캐싱하도록 제한.
+	 */
+	@Cacheable(value = "merchantCategory", key = "#merchantName + '|' + #merchantStoreType",
+			unless = "#result.method() != T(com.wonnabe.classifier.domain.ClassificationMethod).LLM")
 	public ClassificationResult classify(String merchantName, String merchantStoreType) {
 		String userText = "가맹점명: " + merchantName
 				+ (merchantStoreType == null || merchantStoreType.isBlank() ? "" : "\n업종: " + merchantStoreType);

@@ -5,6 +5,7 @@ public enum Category {
 	TRANSPORT("교통"),
 	SHOPPING("쇼핑"),
 	CULTURE("문화"),
+	TRAVEL("여행"),
 	OTHER("기타");
 
 	private final String label;
