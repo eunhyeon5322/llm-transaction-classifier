@@ -83,7 +83,8 @@ public class GeminiClassificationService {
 		}
 	}
 
-	private Category parseCategory(String text) {
+	// package-private: 테스트에서 직접 검증하기 위해 private을 풀어둠
+	Category parseCategory(String text) {
 		if (text == null) {
 			return null;
 		}
