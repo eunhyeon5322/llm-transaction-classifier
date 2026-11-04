@@ -19,7 +19,11 @@ Thumbs.db
 data/
 !data/.gitkeep
 
-# 로컬 환경변수/시크릿 (Claude API 키 등)
+# 로컬 환경변수/시크릿 (Gemini API 키 등)
 .env
 *.local.yml
 application-local.yml
+
+# 개인 작업 메모 (공개 레포에는 올리지 않음)
+CLAUDE.md
+docs/portfolio-notes.md

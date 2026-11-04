@@ -9,7 +9,7 @@ import com.wonnabe.classifier.domain.ClassificationMethod;
 
 /**
  * 가맹점명/업종에 키워드가 포함되어 있으면 해당 카테고리로 분류한다 (1차 분류).
- * 어떤 키워드와도 매칭되지 않으면 UNCLASSIFIED를 반환하며, 이후 Claude API(2차 분류) 대상이 된다.
+ * 어떤 키워드와도 매칭되지 않으면 UNCLASSIFIED를 반환하며, 이후 LLM API(2차 분류) 대상이 된다.
  */
 @Component
 public class KeywordClassifier {
